@@ -1,5 +1,5 @@
 <?php 
-    //set default value of variables for initial page load
+    // set default value of variables for initial page load
     if (!isset($investment)) { $investment = '10000'; } 
     if (!isset($interest_rate)) { $interest_rate = '5'; } 
     if (!isset($years)) { $years = '5'; } 
@@ -20,17 +20,29 @@
     <form action="display_results.php" method="post">
 
         <div id="data">
+            <!-- Investment Amount Dropdown -->
             <label>Investment Amount:</label>
-            <input type="text" name="investment"
-                   value="<?php echo $investment; ?>"/><br>
+            <select name="investment">
+                <?php for ($i = 10000; $i <= 50000; $i += 5000): ?>
+                    <option value="<?php echo $i; ?>" <?php if ($investment == $i) echo 'selected'; ?>>
+                        <?php echo '$' . number_format($i); ?>
+                    </option>
+                <?php endfor; ?>
+            </select><br>
 
+            <!-- Yearly Interest Rate Dropdown -->
             <label>Yearly Interest Rate:</label>
-            <input type="text" name="interest_rate"
-                   value="<?php echo $interest_rate; ?>"/><br>
+            <select name="interest_rate">
+                <?php for ($rate = 4; $rate <= 12; $rate += 0.5): ?>
+                    <option value="<?php echo $rate; ?>" <?php if ($interest_rate == $rate) echo 'selected'; ?>>
+                        <?php echo $rate . '%'; ?>
+                    </option>
+                <?php endfor; ?>
+            </select><br>
 
+            <!-- Number of Years Text Box -->
             <label>Number of Years:</label>
-            <input type="text" name="years"
-                   value="<?php echo $years; ?>"/><br>
+            <input type="text" name="years" value="<?php echo $years; ?>"/><br>
         </div>
 
         <div id="buttons">
